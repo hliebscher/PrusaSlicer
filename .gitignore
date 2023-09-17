@@ -19,3 +19,6 @@ build-linux/*
 deps/build-linux/*
 **/.DS_Store
 **/.idea/
+build_arm64/*
+deps/build_arm64/*
+error.txt
