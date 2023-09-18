@@ -76,10 +76,10 @@ cd $WD
 mkdir -p build_$ARCH
 cd build_$ARCH
 echo "building slicer..."
-#cmake .. -GXcode -DBBL_RELEASE_TO_PUBLIC=1 -DCMAKE_PREFIX_PATH="$DEPS/usr/local" -DCMAKE_INSTALL_PREFIX="$PWD/PrusaSlicer" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=ON -DCMAKE_INSTALL_RPATH="$DEPS/usr/local" -DCMAKE_MACOSX_BUNDLE=ON -DCMAKE_OSX_ARCHITECTURES=${ARCH}
-cmake .. -GXcode -DBBL_RELEASE_TO_PUBLIC=1 -DCMAKE_PREFIX_PATH="$DEPS/usr/local"  -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=ON -DCMAKE_INSTALL_RPATH="$DEPS/usr/local" -DCMAKE_OSX_ARCHITECTURES=${ARCH}
+cmake .. -GXcode -DBBL_RELEASE_TO_PUBLIC=1 -DCMAKE_PREFIX_PATH="$DEPS/usr/local" -DCMAKE_INSTALL_PREFIX="$PWD/PrusaSlicer" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=ON -DCMAKE_INSTALL_RPATH="$DEPS/usr/local" -DCMAKE_MACOSX_BUNDLE=ON -DCMAKE_OSX_ARCHITECTURES=${ARCH}
+#cmake .. -DCMAKE_PREFIX_PATH="$DEPS/usr/local"  -DCMAKE_OSX_ARCHITECTURES=${ARCH}
 cmake --build . --config Release --target ALL_BUILD 
-#make -j$(sysctl -n hw.ncpu) install/strip
+#make 
 cd $WD
 ./run_gettext.sh
 cd build_$ARCH
@@ -89,7 +89,8 @@ rm -r ./PrusaSlicer.app
 cp -pR ../src/Release/PrusaSlicer.app ./PrusaSlicer.app
 resources_path=$(readlink ./PrusaSlicer.app/Contents/Resources)
 rm ./PrusaSlicer.app/Contents/Resources
-cp -R $resources_path ./PrusaSlicer.app/Contents/Resources
+#cp -R $resources_path ./PrusaSlicer.app/Contents/Resources
+cp -R ../../resources ./PrusaSlicer.app/Contents/Resources
 # delete .DS_Store file
 find ./PrusaSlicer.app/ -name '.DS_Store' -delete
 # extract version
